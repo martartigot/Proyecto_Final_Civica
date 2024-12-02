@@ -1,0 +1,306 @@
+version: 2
+
+sources:
+  - name: bronze
+    schema: BRONZE
+    database: DEV_ALUMNO14_PROYECTO_FINAL
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
+    #freshness:
+    #  warn_after: {count: 24, period: hour}
+    #  error_after: {count: 48, period: hour}
+
+    tables:
+      #hecha
+      - name: circuits
+        description: "Details of F1 circuits."
+        columns:
+          - name: circuitId
+            description: "Unique ID for each circuit."
+            tests:
+              - unique
+              - not_null
+          - name: circuitRef
+            description: "Reference name of the circuit."
+            tests:
+              - unique
+              - not_null
+          - name: name
+            description: "Name of the circuit."
+            tests:
+              - unique
+              - not_null
+          - name: location
+            description: "Location of the circuit."
+            tests:
+              - not_null
+          - name: country
+            description: "Country where the circuit is located."
+            tests:
+              - not_null
+          - name: lat
+            description: "Latitude of the circuit."
+            tests:
+              - not_null
+          - name: lng
+            description: "Longitude of the circuit."
+            tests:
+              - not_null
+          - name: alt
+            description: "Altitud of the circuit."
+            tests:
+              - not_null
+          - name: url
+            description: "URL of the wikipedia of the circuit."
+
+      - name: constructor_results
+        description: "Results of constructors in races."
+        columns:
+          - name: constructorResultsId
+            description: "Unique ID for constructor results."
+            tests:
+              - unique
+              - not_null
+          - name: raceId
+            description: "ID of the race."
+            tests:
+              - not_null
+          - name: constructorId
+            description: "ID of the constructor."
+            tests:
+              - not_null
+          - name: points
+            description: "Points scored by the constructor."
+            tests:
+              - not_null
+          - name: status
+            description: "Status of the result."
+
+      - name: constructor_standings
+        description: "Constructor standings over races."
+        columns:
+          - name: constructorStandingsId
+            description: "Unique ID for constructor standings."
+            tests:
+              - unique
+              - not_null
+          - name: raceId
+            description: "ID of the race."
+            tests:
+              - not_null
+          - name: constructorId
+            description: "ID of the constructor."
+            tests:
+              - not_null
+          - name: points
+            description: "Points accumulated by the constructor."
+            tests:
+              - not_null
+          - name: position
+            description: "Position in standings."
+            tests:
+              - not_null
+          - name: positionText
+            description: "Textual position in standings."
+            tests:
+              - not_null
+          - name: wins
+            description: "Number of wins."
+            tests:
+              - not_null
+
+      #hecha
+      - name: constructors
+        description: "Details of F1 constructors."
+        columns:
+          - name: constructorId
+            description: "Unique ID for constructors."
+            tests:
+              - unique
+              - not_null
+          - name: constructorRef
+            description: "Reference name of the constructor."
+            tests:
+              - unique
+              - not_null
+          - name: name
+            description: "Name of the constructor."
+            tests:
+              - unique
+              - not_null
+          - name: nationality
+            description: "Nationality of the constructor."
+            tests:
+              - not_null
+          - name: url
+            description: ""
+
+      - name: driver_standings
+        description: "Driver standings over races."
+        columns:
+          - name: driverStandingsId
+            description: "Unique ID for driver standings."
+            tests:
+              - unique
+              - not_null
+          - name: raceId
+            description: "ID of the race."
+          - name: driverId
+            description: "ID of the driver."
+          - name: points
+            description: "Points accumulated by the driver."
+          - name: position
+            description: "Position in standings."
+          - name: positionText
+            description: "Textual position in standings."
+          - name: wins
+            description: "Number of wins."
+
+      #hecha
+      - name: drivers
+        description: "Details of F1 drivers."
+        columns:
+          - name: driverId
+            description: "Unique ID for drivers."
+            tests:
+              - unique
+              - not_null
+          - name: driverRef
+            description: "Reference name for the driver."
+            tests:
+              - unique
+              - not_null
+          - name: number
+            description: "Driver's racing number."
+          - name: code
+            description: "Driver's code."
+          - name: forename
+            description: "Driver's first name."
+            tests:
+              - not_null
+          - name: surname
+            description: "Driver's last name."
+            tests:
+              - not_null
+          - name: dob
+            description: "Date of birth of the driver."
+          - name: nationality
+            description: "Driver's nationality."
+            tests:
+              - not_null
+          - name: url
+            description: ""
+
+
+      - name: lap_times
+        description: "Lap times of drivers in races."
+        columns:
+          - name: raceId
+            description: "ID of the race."
+            tests:
+              - not_null
+          - name: driverId
+            description: "ID of the driver."
+            tests:
+              - not_null
+          - name: lap
+            description: "Lap number."
+            tests:
+              - not_null
+          - name: position
+            description: "Position during the lap."
+            tests:
+              - not_null
+          - name: time
+            description: "Lap time in string format."
+            tests:
+              - not_null
+          - name: milliseconds
+            description: "Lap time in milliseconds."
+            tests:
+              - not_null
+
+      #hecho
+      - name: pit_stops
+        description: "Details of pit stops during races."
+        columns:
+          - name: raceId
+            description: "ID of the race."
+            tests:
+              - not_null
+          - name: driverId
+            description: "ID of the driver."
+            tests:
+              - not_null
+          - name: stop
+            description: "Stop number."
+            tests:
+              - not_null
+          - name: lap
+            description: "Lap number."
+            tests:
+              - not_null
+          - name: time
+            description: "Time of the pit stop."
+            tests:
+              - not_null
+          - name: duration
+            description: "Duration of the pit stop."
+            tests:
+              - not_null
+          - name: milliseconds
+            description: "Duration in milliseconds."
+            tests:
+              - not_null
+
+      - name: qualifying
+        description: "Qualifying session results."
+        columns:
+          - name: qualifyId
+            description: "Unique ID for qualifying results."
+            tests:
+              - unique
+              - not_null
+          - name: raceId
+            description: "ID of the race."
+          - name: driverId
+            description: "ID of the driver."
+
+      - name: races
+        description: "Details of F1 races."
+        columns:
+          - name: raceId
+            description: "Unique ID for each race."
+            tests:
+              - unique
+              - not_null
+          - name: year
+            description: "Year of the race."
+
+      - name: sprint_results
+        description: "Sprint race results."
+        columns:
+          - name: resultId
+            description: "Unique ID for sprint results."
+          - name: raceId
+            description: "ID of the race."
+          - name: driverId
+            description: "ID of the driver."
+
+      #hecha
+      - name: status
+        description: "Status descriptions for races."
+        columns:
+          - name: statusId
+            description: "Unique ID for each status."
+            tests:
+              - unique
+              - not_null
+          - name: status
+            description: "Name for each status."
+            tests:
+              - unique
