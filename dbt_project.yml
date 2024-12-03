@@ -47,6 +47,7 @@ models:
     marts:
       +materialized: table
       +database: "DEV_ALUMNO14_PROYECTO_FINAL"
+      +schema: gold
       core:
         +schema: gold
 

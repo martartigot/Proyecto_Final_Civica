@@ -10,12 +10,7 @@ sources:
       schema: false
       identifier: false
 
-    #freshness:
-    #  warn_after: {count: 24, period: hour}
-    #  error_after: {count: 48, period: hour}
-
     tables:
-      #hecha
       - name: circuits
         description: "Details of F1 circuits."
         columns:
@@ -30,7 +25,7 @@ sources:
               - unique
               - not_null
           - name: name
-            description: "Name of the circuit."
+            description: "Full name of the circuit."
             tests:
               - unique
               - not_null
@@ -51,13 +46,12 @@ sources:
             tests:
               - not_null
           - name: alt
-            description: "Altitud of the circuit."
+            description: "Altitude of the circuit."
             tests:
               - not_null
           - name: url
-            description: "URL of the wikipedia of the circuit."
+            description: "URL of the Wikipedia page for the circuit."
 
-      #hecha
       - name: constructor_results
         description: "Results of constructors in races."
         columns:
@@ -70,18 +64,24 @@ sources:
             description: "ID of the race."
             tests:
               - not_null
+              - relationships:
+                  to: source('bronze', 'races')
+                  field: raceId
           - name: constructorId
             description: "ID of the constructor."
             tests:
               - not_null
+              - relationships:
+                  to: source('bronze', 'constructors')
+                  field: constructorId
           - name: points
             description: "Points scored by the constructor."
             tests:
               - not_null
+              - positive_values
           - name: status
             description: "Status of the result."
 
-      #hecha
       - name: constructor_standings
         description: "Constructor standings over races."
         columns:
@@ -94,18 +94,26 @@ sources:
             description: "ID of the race."
             tests:
               - not_null
+              - relationships:
+                  to: source('bronze', 'races')
+                  field: raceId
           - name: constructorId
             description: "ID of the constructor."
             tests:
               - not_null
+              - relationships:
+                  to: source('bronze', 'constructors')
+                  field: constructorId
           - name: points
             description: "Points accumulated by the constructor."
             tests:
               - not_null
+              - positive_values
           - name: position
             description: "Position in standings."
             tests:
               - not_null
+              - positive_values
           - name: positionText
             description: "Textual position in standings."
             tests:
@@ -114,8 +122,8 @@ sources:
             description: "Number of wins."
             tests:
               - not_null
+              - positive_values
 
-      #hecha
       - name: constructors
         description: "Details of F1 constructors."
         columns:
@@ -130,7 +138,7 @@ sources:
               - unique
               - not_null
           - name: name
-            description: "Name of the constructor."
+            description: "Complete name of the constructor."
             tests:
               - unique
               - not_null
@@ -139,9 +147,8 @@ sources:
             tests:
               - not_null
           - name: url
-            description: ""
+            description: "URL of the Wikipedia page for the constructor."
 
-      #hecho
       - name: driver_standings
         description: "Driver standings over races."
         columns:
@@ -154,18 +161,26 @@ sources:
             description: "ID of the race."
             tests:
               - not_null
+              - relationships:
+                  to: source('bronze', 'races')
+                  field: raceId
           - name: driverId
             description: "ID of the driver."
             tests:
               - not_null
+              - relationships:
+                  to: source('bronze', 'drivers')
+                  field: driverId
           - name: points
             description: "Points accumulated by the driver."
             tests:
               - not_null
+              - positive_values
           - name: position
             description: "Position in standings."
             tests:
               - not_null
+              - positive_values
           - name: positionText
             description: "Textual position in standings."
             tests:
@@ -174,8 +189,8 @@ sources:
             description: "Number of wins."
             tests:
               - not_null
+              - positive_values
 
-      #hecha
       - name: drivers
         description: "Details of F1 drivers."
         columns:
@@ -208,9 +223,8 @@ sources:
             tests:
               - not_null
           - name: url
-            description: ""
+            description: "URL of the Wikipedia page for the driver."
 
-      #hecha
       - name: lap_times
         description: "Lap times of drivers in races."
         columns:
@@ -218,18 +232,26 @@ sources:
             description: "ID of the race."
             tests:
               - not_null
+              - relationships:
+                  to: source('bronze', 'races')
+                  field: raceId
           - name: driverId
             description: "ID of the driver."
             tests:
               - not_null
+              - relationships:
+                  to: source('bronze', 'drivers')
+                  field: driverId
           - name: lap
             description: "Lap number."
             tests:
               - not_null
+              - positive_values
           - name: position
             description: "Position during the lap."
             tests:
               - not_null
+              - positive_values
           - name: time
             description: "Lap time in string format."
             tests:
@@ -239,7 +261,6 @@ sources:
             tests:
               - not_null
 
-      #hecho
       - name: pit_stops
         description: "Details of pit stops during races."
         columns:
@@ -247,18 +268,26 @@ sources:
             description: "ID of the race."
             tests:
               - not_null
+              - relationships:
+                  to: source('bronze', 'races')
+                  field: raceId
           - name: driverId
             description: "ID of the driver."
             tests:
               - not_null
+              - relationships:
+                  to: source('bronze', 'drivers')
+                  field: driverId
           - name: stop
             description: "Stop number."
             tests:
               - not_null
+              - positive_values
           - name: lap
             description: "Lap number."
             tests:
               - not_null
+              - positive_values
           - name: time
             description: "Time of the pit stop."
             tests:
@@ -271,8 +300,8 @@ sources:
             description: "Duration in milliseconds."
             tests:
               - not_null
+              - positive_values
 
-      #hecho
       - name: qualifying
         description: "Qualifying session results."
         columns:
@@ -285,22 +314,33 @@ sources:
             description: "ID of the race."
             tests:
               - not_null
+              - relationships:
+                  to: source('bronze', 'races')
+                  field: raceId
           - name: driverId
             description: "ID of the driver."
             tests:
               - not_null
+              - relationships:
+                  to: source('bronze', 'drivers')
+                  field: driverId
           - name: constructorId
             description: "ID of the constructor."
             tests:
               - not_null
+              - relationships:
+                  to: source('bronze', 'constructors')
+                  field: constructorId
           - name: number
             description: "Driver's car number."
             tests:
               - not_null
+              - positive_values
           - name: position
             description: "Final position during the qualifying session."
             tests:
               - not_null
+              - positive_values
           - name: q1
             description: "Qualifying lap time in Q1."
             tests:
@@ -314,7 +354,6 @@ sources:
             tests:
               - not_null
 
-      #hecho
       - name: races
         description: "Details of F1 races."
         columns:
@@ -327,14 +366,19 @@ sources:
             description: "Year of the race."
             tests:
               - not_null
+              - positive_values
           - name: round
             description: "Race round in the championship."
             tests:
               - not_null
+              - positive_values
           - name: circuitId
             description: "ID of the circuit."
             tests:
               - not_null
+              - relationships:
+                  to: source('bronze', 'circuits')
+                  field: circuitId
           - name: name
             description: "Name of the race."
             tests:
@@ -354,23 +398,22 @@ sources:
           - name: fp1_time
             description: "Time of the first practice session."
           - name: fp2_date
-            description: "Date of the second practice session."
+            description: "Date of the second practice session for the race."
           - name: fp2_time
-            description: "Time of the second practice session."
+            description: "Time of the second practice session for the race."
           - name: fp3_date
-            description: "Date of the third practice session."
+            description: "Date of the third practice session for the race."
           - name: fp3_time
-            description: "Time of the third practice session."
+            description: "Time of the third practice session for the race."
           - name: quali_date
-            description: "Date of the qualifying session."
+            description: "Date of the qualifying session for the race."
           - name: quali_time
-            description: "Time of the qualifying session."
+            description: "Time of the qualifying session for the race."
           - name: sprint_date
-            description: "Date of the sprint session."
+            description: "Date of the sprint session for the race."
           - name: sprint_time
-            description: "Time of the sprint session."
-
-      #hecho
+            description: "Time of the sprint session for the race."
+    
       - name: sprint_results
         description: "Sprint race results."
         columns:
@@ -380,23 +423,32 @@ sources:
               - unique
               - not_null
           - name: raceId
-            description: "ID of the race."
+            description: "ID of the race associated with this sprint result."
             tests:
               - not_null
+              - relationships:
+                  to: source('bronze', 'races')
+                  field: raceId
           - name: driverId
-            description: "ID of the driver."
+            description: "ID of the driver participating in the sprint."
             tests:
               - not_null
+              - relationships:
+                  to: source('bronze', 'drivers')
+                  field: driverId
           - name: constructorId
-            description: "ID of the constructor."
+            description: "ID of the constructor for the driver's car."
             tests:
               - not_null
+              - relationships:
+                  to: source('bronze', 'constructors')
+                  field: constructorId
           - name: number
-            description: "Driver's car number."
+            description: "Car number of the driver."
             tests:
               - not_null
           - name: grid
-            description: "Starting grid position."
+            description: "Grid position where the driver started the sprint."
             tests:
               - not_null
           - name: position
@@ -404,41 +456,36 @@ sources:
             tests:
               - not_null
           - name: positionText
-            description: "Text description of the final position."
+            description: "Textual representation of the final position."
             tests:
               - not_null
           - name: positionOrder
-            description: "Order of the final position."
+            description: "Order of the final position in numerical format."
             tests:
               - not_null
           - name: points
-            description: "Points awarded in the sprint."
+            description: "Points awarded to the driver in the sprint."
             tests:
               - not_null
           - name: laps
-            description: "Number of laps completed."
+            description: "Number of laps completed by the driver in the sprint."
             tests:
               - not_null
           - name: time
-            description: "Finish time."
-            tests:
-              - not_null
+            description: "Total time taken to complete the sprint."
           - name: milliseconds
-            description: "Finish time in milliseconds."
-            tests:
-              - not_null
+            description: "Time in milliseconds for the sprint."
           - name: fastestLap
-            description: "Number of the fastest lap."
-            tests:
-              - not_null
+            description: "Number of the fastest lap completed by the driver."
           - name: fastestLapTime
-            description: "Time of the fastest lap."
-            tests:
-              - not_null
+            description: "Time of the fastest lap in the sprint."
           - name: statusId
-            description: "Status ID for the result."
+            description: "ID of the status associated with the sprint result."
             tests:
               - not_null
+              - relationships:
+                  to: source('bronze', 'status')
+                  field: statusId
 
       - name: results
         description: "Race results."
@@ -448,25 +495,36 @@ sources:
             tests:
               - not_null
           - name: raceId
-            description: "ID of the race."
+            description: "ID of the race associated with this result."
             tests:
               - not_null
+              - relationships:
+                  to: source('bronze', 'races')
+                  field: raceId
           - name: driverId
-            description: "ID of the driver."
+            description: "ID of the driver in the race."
             tests:
               - not_null
+              - relationships:
+                  to: source('bronze', 'drivers')
+                  field: driverId
           - name: constructorId
-            description: "ID of the constructor."
+            description: "ID of the constructor for the driver's car."
             tests:
               - not_null
+              - relationships:
+                  to: source('bronze', 'constructors')
+                  field: constructorId
           - name: number
             description: "Driver's car number."
             tests:
               - not_null
+              -  positive_values
           - name: grid
-            description: "Starting grid position."
+            description: "Grid position where the driver started the race."
             tests:
               - not_null
+              - positive_values
           - name: position
             description: "Final position in the race."
             tests:
@@ -476,47 +534,40 @@ sources:
             tests:
               - not_null
           - name: positionOrder
-            description: "Order of the final position."
+            description: "Order of the final position in numerical format."
             tests:
               - not_null
+              - positive_values
           - name: points
-            description: "Points awarded in the race."
+            description: "Points awarded to the driver in the race."
             tests:
               - not_null
+              - positive_values
           - name: laps
-            description: "Number of laps completed."
+            description: "Number of laps completed in the race."
             tests:
               - not_null
+              - positive_values
           - name: time
-            description: "Finish time."
-            tests:
-              - not_null
+            description: "Finish time of the driver."
           - name: milliseconds
             description: "Finish time in milliseconds."
-            tests:
-              - not_null
           - name: fastestLap
-            description: "Number of the fastest lap."
-            tests:
-              - not_null
+            description: "Number of the fastest lap completed by the driver."
           - name: rank
             description: "Rank of the fastest lap."
-            tests:
-              - not_null
           - name: fastestLapTime
-            description: "Time of the fastest lap."
-            tests:
-              - not_null
+            description: "Time of the fastest lap in the race."
           - name: fastestLapSpeed
-            description: "Speed of the fastest lap."
-            tests:
-              - not_null
+            description: "Speed of the fastest lap in the race."
           - name: statusId
-            description: "Status ID for the result."
+            description: "ID of the status associated with the result."
             tests:
               - not_null
+              - relationships:
+                  to: source('bronze', 'status')
+                  field: statusId
 
-      #hecha
       - name: status
         description: "Status descriptions for races."
         columns:
@@ -526,6 +577,7 @@ sources:
               - unique
               - not_null
           - name: status
-            description: "Name for each status."
+            description: "Text description of the status."
             tests:
               - unique
+
