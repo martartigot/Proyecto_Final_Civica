@@ -11,7 +11,7 @@ renamed as (
     select
         driverid AS driver_id,
         driverref AS driver_ref,
-        COALESCE(number, 0) AS driver_number, 
+        COALESCE(number, 000) AS driver_number, 
         COALESCE(code, '') AS driver_code,
         forename AS driver_forename,
         surname AS driver_surname,

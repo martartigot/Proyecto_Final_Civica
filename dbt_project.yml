@@ -44,3 +44,9 @@ models:
       bronze:
         +schema: silver
 
+    marts:
+      +materialized: table
+      +database: "DEV_ALUMNO14_PROYECTO_FINAL"
+      core:
+        +schema: gold
+

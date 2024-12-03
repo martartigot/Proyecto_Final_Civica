@@ -57,6 +57,7 @@ sources:
           - name: url
             description: "URL of the wikipedia of the circuit."
 
+      #hecha
       - name: constructor_results
         description: "Results of constructors in races."
         columns:
@@ -80,6 +81,7 @@ sources:
           - name: status
             description: "Status of the result."
 
+      #hecha
       - name: constructor_standings
         description: "Constructor standings over races."
         columns:
@@ -139,6 +141,7 @@ sources:
           - name: url
             description: ""
 
+      #hecho
       - name: driver_standings
         description: "Driver standings over races."
         columns:
@@ -149,16 +152,28 @@ sources:
               - not_null
           - name: raceId
             description: "ID of the race."
+            tests:
+              - not_null
           - name: driverId
             description: "ID of the driver."
+            tests:
+              - not_null
           - name: points
             description: "Points accumulated by the driver."
+            tests:
+              - not_null
           - name: position
             description: "Position in standings."
+            tests:
+              - not_null
           - name: positionText
             description: "Textual position in standings."
+            tests:
+              - not_null
           - name: wins
             description: "Number of wins."
+            tests:
+              - not_null
 
       #hecha
       - name: drivers
@@ -195,7 +210,7 @@ sources:
           - name: url
             description: ""
 
-
+      #hecha
       - name: lap_times
         description: "Lap times of drivers in races."
         columns:
@@ -257,6 +272,7 @@ sources:
             tests:
               - not_null
 
+      #hecho
       - name: qualifying
         description: "Qualifying session results."
         columns:
@@ -267,9 +283,38 @@ sources:
               - not_null
           - name: raceId
             description: "ID of the race."
+            tests:
+              - not_null
           - name: driverId
             description: "ID of the driver."
+            tests:
+              - not_null
+          - name: constructorId
+            description: "ID of the constructor."
+            tests:
+              - not_null
+          - name: number
+            description: "Driver's car number."
+            tests:
+              - not_null
+          - name: position
+            description: "Final position during the qualifying session."
+            tests:
+              - not_null
+          - name: q1
+            description: "Qualifying lap time in Q1."
+            tests:
+              - not_null
+          - name: q2
+            description: "Qualifying lap time in Q2."
+            tests:
+              - not_null
+          - name: q3
+            description: "Qualifying lap time in Q3."
+            tests:
+              - not_null
 
+      #hecho
       - name: races
         description: "Details of F1 races."
         columns:
@@ -280,16 +325,196 @@ sources:
               - not_null
           - name: year
             description: "Year of the race."
+            tests:
+              - not_null
+          - name: round
+            description: "Race round in the championship."
+            tests:
+              - not_null
+          - name: circuitId
+            description: "ID of the circuit."
+            tests:
+              - not_null
+          - name: name
+            description: "Name of the race."
+            tests:
+              - not_null
+          - name: date
+            description: "Date of the race."
+            tests:
+              - not_null
+          - name: time
+            description: "Start time of the race."
+            tests:
+              - not_null
+          - name: url
+            description: "Wikipedia URL for race details."
+          - name: fp1_date
+            description: "Date of the first practice session."
+          - name: fp1_time
+            description: "Time of the first practice session."
+          - name: fp2_date
+            description: "Date of the second practice session."
+          - name: fp2_time
+            description: "Time of the second practice session."
+          - name: fp3_date
+            description: "Date of the third practice session."
+          - name: fp3_time
+            description: "Time of the third practice session."
+          - name: quali_date
+            description: "Date of the qualifying session."
+          - name: quali_time
+            description: "Time of the qualifying session."
+          - name: sprint_date
+            description: "Date of the sprint session."
+          - name: sprint_time
+            description: "Time of the sprint session."
 
+      #hecho
       - name: sprint_results
         description: "Sprint race results."
         columns:
           - name: resultId
             description: "Unique ID for sprint results."
+            tests:
+              - unique
+              - not_null
           - name: raceId
             description: "ID of the race."
+            tests:
+              - not_null
           - name: driverId
             description: "ID of the driver."
+            tests:
+              - not_null
+          - name: constructorId
+            description: "ID of the constructor."
+            tests:
+              - not_null
+          - name: number
+            description: "Driver's car number."
+            tests:
+              - not_null
+          - name: grid
+            description: "Starting grid position."
+            tests:
+              - not_null
+          - name: position
+            description: "Final position in the sprint."
+            tests:
+              - not_null
+          - name: positionText
+            description: "Text description of the final position."
+            tests:
+              - not_null
+          - name: positionOrder
+            description: "Order of the final position."
+            tests:
+              - not_null
+          - name: points
+            description: "Points awarded in the sprint."
+            tests:
+              - not_null
+          - name: laps
+            description: "Number of laps completed."
+            tests:
+              - not_null
+          - name: time
+            description: "Finish time."
+            tests:
+              - not_null
+          - name: milliseconds
+            description: "Finish time in milliseconds."
+            tests:
+              - not_null
+          - name: fastestLap
+            description: "Number of the fastest lap."
+            tests:
+              - not_null
+          - name: fastestLapTime
+            description: "Time of the fastest lap."
+            tests:
+              - not_null
+          - name: statusId
+            description: "Status ID for the result."
+            tests:
+              - not_null
+
+      - name: results
+        description: "Race results."
+        columns:
+          - name: resultId
+            description: "Unique ID for race results."
+            tests:
+              - not_null
+          - name: raceId
+            description: "ID of the race."
+            tests:
+              - not_null
+          - name: driverId
+            description: "ID of the driver."
+            tests:
+              - not_null
+          - name: constructorId
+            description: "ID of the constructor."
+            tests:
+              - not_null
+          - name: number
+            description: "Driver's car number."
+            tests:
+              - not_null
+          - name: grid
+            description: "Starting grid position."
+            tests:
+              - not_null
+          - name: position
+            description: "Final position in the race."
+            tests:
+              - not_null
+          - name: positionText
+            description: "Text description of the final position."
+            tests:
+              - not_null
+          - name: positionOrder
+            description: "Order of the final position."
+            tests:
+              - not_null
+          - name: points
+            description: "Points awarded in the race."
+            tests:
+              - not_null
+          - name: laps
+            description: "Number of laps completed."
+            tests:
+              - not_null
+          - name: time
+            description: "Finish time."
+            tests:
+              - not_null
+          - name: milliseconds
+            description: "Finish time in milliseconds."
+            tests:
+              - not_null
+          - name: fastestLap
+            description: "Number of the fastest lap."
+            tests:
+              - not_null
+          - name: rank
+            description: "Rank of the fastest lap."
+            tests:
+              - not_null
+          - name: fastestLapTime
+            description: "Time of the fastest lap."
+            tests:
+              - not_null
+          - name: fastestLapSpeed
+            description: "Speed of the fastest lap."
+            tests:
+              - not_null
+          - name: statusId
+            description: "Status ID for the result."
+            tests:
+              - not_null
 
       #hecha
       - name: status
