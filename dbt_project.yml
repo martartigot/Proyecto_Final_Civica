@@ -51,3 +51,8 @@ models:
       core:
         +schema: gold
 
+snapshots:
+  +transient: false
+  +target_database: "DEV_ALUMNO14_PROYECTO_FINAL"
+  +target_schema: snapshots
+

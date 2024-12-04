@@ -9,6 +9,7 @@ source as (
 renamed as (
 
     select
+        {{ dbt_utils.generate_surrogate_key(['race_id', 'driver_id', 'lap']) }} AS lapTime_id,
         raceid AS race_id,
         driverid AS driver_id,
         lap,

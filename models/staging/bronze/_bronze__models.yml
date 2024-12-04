@@ -4,11 +4,11 @@ models:
   - name: circuits
     description: "Details of F1 circuits."
     columns:
-      - name: circuitId
+      - name: circuit_id
         description: "Unique ID for each circuit."
-      - name: circuitRef
+      - name: circuit_ref
         description: "Reference name of the circuit."
-      - name: name
+      - name: circuit_name
         description: "Name of the circuit."
       - name: location
         description: "Location of the circuit."
@@ -20,19 +20,29 @@ models:
         description: "Longitude of the circuit."
       - name: alt
         description: "Altitude of the circuit."
-      - name: url
-        description: "URL of the Wikipedia page of the circuit."
+
+  - name: constructors
+    description: "Details of F1 constructors."
+    columns:
+      - name: constructor_id
+        description: "Unique ID for constructors."
+      - name: constructor_ref
+        description: "Reference name of the constructor."
+      - name: constructor_name
+        description: "Name of the constructor."
+      - name: constructor_nationality
+        description: "Nationality of the constructor."
 
   - name: constructor_results
     description: "Results of constructors in races."
     columns:
-      - name: constructorResultsId
+      - name: constructorResults_id
         description: "Unique ID for constructor results."
-      - name: raceId
+      - name: race_id
         description: "ID of the race."
-      - name: constructorId
+      - name: constructor_id
         description: "ID of the constructor."
-      - name: points
+      - name: constructor_points
         description: "Points scored by the constructor."
       - name: status
         description: "Status of the result."
@@ -40,193 +50,155 @@ models:
   - name: constructor_standings
     description: "Constructor standings over races."
     columns:
-      - name: constructorStandingsId
+      - name: constructorStandings_id
         description: "Unique ID for constructor standings."
-      - name: raceId
+      - name: race_id
         description: "ID of the race."
-      - name: constructorId
+      - name: constructor_id
         description: "ID of the constructor."
-      - name: points
+      - name: constructor_points
         description: "Points accumulated by the constructor."
-      - name: position
+      - name: constructor_position
         description: "Position in standings."
-      - name: positionText
+      - name: position_text
         description: "Textual position in standings."
-      - name: wins
-        description: "Number of wins."
-
-  - name: constructors
-    description: "Details of F1 constructors."
-    columns:
-      - name: constructorId
-        description: "Unique ID for constructors."
-      - name: constructorRef
-        description: "Reference name of the constructor."
-      - name: name
-        description: "Name of the constructor."
-      - name: nationality
-        description: "Nationality of the constructor."
-      - name: url
-        description: "URL of the Wikipedia page of the constructor."
-
-  - name: driver_standings
-    description: "Driver standings over races."
-    columns:
-      - name: driverStandingsId
-        description: "Unique ID for driver standings."
-      - name: raceId
-        description: "ID of the race."
-      - name: driverId
-        description: "ID of the driver."
-      - name: points
-        description: "Points accumulated by the driver."
-      - name: position
-        description: "Position in standings."
-      - name: positionText
-        description: "Textual position in standings."
-      - name: wins
+      - name: constructor_wins
         description: "Number of wins."
 
   - name: drivers
     description: "Details of F1 drivers."
     columns:
-      - name: driverId
+      - name: driver_id
         description: "Unique ID for drivers."
-      - name: driverRef
+      - name: driver_ref
         description: "Reference name for the driver."
-      - name: number
+      - name: driver_number
         description: "Driver's racing number."
-      - name: code
+      - name: driver_code
         description: "Driver's code."
-      - name: forename
+      - name: driver_forename
         description: "Driver's first name."
-      - name: surname
+      - name: driver_surname
         description: "Driver's last name."
-      - name: dob
-        description: "Date of birth of the driver."
-      - name: nationality
+      - name: driver_nationality
         description: "Driver's nationality."
-      - name: url
-        description: "URL of the Wikipedia page of the driver."
+
+  - name: driver_standings
+    description: "Driver standings over races."
+    columns:
+      - name: driverStandings_id
+        description: "Unique ID for driver standings."
+      - name: race_id
+        description: "ID of the race."
+      - name: driver_id
+        description: "ID of the driver."
+      - name: driver_points
+        description: "Points accumulated by the driver."
+      - name: driver_position
+        description: "Position in standings."
+      - name: position_text
+        description: "Textual position in standings."
+      - name: wins
+        description: "Number of wins."
 
   - name: lap_times
     description: "Lap times of drivers in races."
     columns:
-      - name: raceId
+      - name: lapTime_id
+        description: "Unique ID for lap times."
+      - name: race_id
         description: "ID of the race."
-      - name: driverId
+      - name: driver_id
         description: "ID of the driver."
       - name: lap
         description: "Lap number."
-      - name: position
+      - name: race_position
         description: "Position during the lap."
-      - name: time
+      - name: lap_time
         description: "Lap time in string format."
-      - name: milliseconds
+      - name: lap_milliseconds
         description: "Lap time in milliseconds."
 
   - name: pit_stops
     description: "Details of pit stops during races."
     columns:
-      - name: raceId
+      - name: pitStops_id
+        description: "Unique ID for pit stops."
+      - name: race_id
         description: "ID of the race."
-      - name: driverId
+      - name: driver_id
         description: "ID of the driver."
       - name: stop
         description: "Stop number."
       - name: lap
         description: "Lap number."
-      - name: time
+      - name: stop_time
         description: "Time of the pit stop."
-      - name: duration
+      - name: stop_duration
         description: "Duration of the pit stop."
-      - name: milliseconds
+      - name: stop_milliseconds
         description: "Duration in milliseconds."
 
   - name: qualifying
     description: "Qualifying session results."
     columns:
-      - name: qualifyId
+      - name: qualify_id
         description: "Unique ID for qualifying results."
-      - name: raceId
+      - name: race_id
         description: "ID of the race."
-      - name: driverId
+      - name: driver_id
         description: "ID of the driver."
-      - name: constructorId
+      - name: constructor_id
         description: "ID of the constructor."
-      - name: number
+      - name: driver_number
         description: "Driver's car number."
-      - name: position
+      - name: final_position
         description: "Final position during the qualifying session."
-      - name: q1
+      - name: q1_time
         description: "Qualifying lap time in Q1."
-      - name: q2
+      - name: q2_time
         description: "Qualifying lap time in Q2."
-      - name: q3
+      - name: q3_time
         description: "Qualifying lap time in Q3."
 
   - name: races
     description: "Details of F1 races."
     columns:
-      - name: raceId
+      - name: race_id
         description: "Unique ID for each race."
       - name: year
         description: "Year of the race."
-      - name: round
+      - name: race_round
         description: "Race round in the championship."
-      - name: circuitId
+      - name: circuit_id
         description: "ID of the circuit."
-      - name: name
+      - name: race_name
         description: "Name of the race."
-      - name: date
+      - name: race_date
         description: "Date of the race."
-      - name: time
+      - name: race_time
         description: "Start time of the race."
-      - name: url
-        description: "Wikipedia URL for race details."
-      - name: fp1_date
-        description: "Date of the first practice session."
-      - name: fp1_time
-        description: "Time of the first practice session."
-      - name: fp2_date
-        description: "Date of the second practice session."
-      - name: fp2_time
-        description: "Time of the second practice session."
-      - name: fp3_date
-        description: "Date of the third practice session."
-      - name: fp3_time
-        description: "Time of the third practice session."
-      - name: quali_date
-        description: "Date of the qualifying session."
-      - name: quali_time
-        description: "Time of the qualifying session."
-      - name: sprint_date
-        description: "Date of the sprint session."
-      - name: sprint_time
-        description: "Time of the sprint session."
 
   - name: results
     description: "Race results."
     columns:
-      - name: resultId
+      - name: result_id
         description: "Unique ID for race results."
-      - name: raceId
+      - name: race_id
         description: "ID of the race."
-      - name: driverId
+      - name: driver_id
         description: "ID of the driver."
-      - name: constructorId
+      - name: constructor_id
         description: "ID of the constructor."
-      - name: number
+      - name: driver_number
         description: "Driver's car number."
-      - name: grid
+      - name: grid_position
         description: "Starting grid position."
-      - name: position
+      - name: final_position
         description: "Final position in the race."
-      - name: positionText
-        description: "Text description of the final position."
-      - name: positionOrder
-        description: "Order of the final position."
-      - name: points
+      - name: final_rank
+        description: "Final rank in the race."
+      - name: driver_points
         description: "Points awarded in the race."
       - name: laps
         description: "Number of laps completed."
@@ -234,57 +206,53 @@ models:
         description: "Finish time."
       - name: milliseconds
         description: "Finish time in milliseconds."
-      - name: fastestLap
-        description: "Number of the fastest lap."
-      - name: rank
+      - name: fastestlap
+        description: "Fastest lap number."
+      - name: fastestlap_rank
         description: "Rank of the fastest lap."
-      - name: fastestLapTime
+      - name: fastestlaptime
         description: "Time of the fastest lap."
-      - name: fastestLapSpeed
-        description: "Speed of the fastest lap."
-      - name: statusId
+      - name: fastestlapspeed
+        description: "Speed during the fastest lap."
+      - name: status_id
         description: "Status ID for the result."
+  
+  - name: status
+    description: "Race result status."
+    columns:
+      - name: status_id
+        description: "Unique ID for the status."
+      - name: status_name
+        description: "Name of the status (e.g., finished, retired, etc.)."
+      - name: status
+        description: "Description of the status."
 
   - name: sprint_results
     description: "Sprint race results."
     columns:
-      - name: resultId
-        description: "Unique ID for sprint results."
-      - name: raceId
+      - name: sprint_result_id
+        description: "Unique ID for sprint race results."
+      - name: race_id
         description: "ID of the race."
-      - name: driverId
+      - name: driver_id
         description: "ID of the driver."
-      - name: constructorId
+      - name: constructor_id
         description: "ID of the constructor."
-      - name: number
+      - name: driver_number
         description: "Driver's car number."
-      - name: grid
-        description: "Starting grid position."
-      - name: position
-        description: "Final position in the sprint."
-      - name: positionText
-        description: "Text description of the final position."
-      - name: positionOrder
-        description: "Order of the final position."
-      - name: points
-        description: "Points awarded in the sprint."
+      - name: grid_position
+        description: "Starting grid position in the sprint."
+      - name: final_position
+        description: "Final position in the sprint race."
+      - name: final_rank
+        description: "Final rank in the sprint race."
+      - name: driver_points
+        description: "Points awarded in the sprint race."
       - name: laps
-        description: "Number of laps completed."
+        description: "Number of laps completed in the sprint."
       - name: time
-        description: "Finish time."
+        description: "Finish time in the sprint race."
       - name: milliseconds
         description: "Finish time in milliseconds."
-      - name: fastestLap
-        description: "Number of the fastest lap."
-      - name: fastestLapTime
-        description: "Time of the fastest lap."
-      - name: statusId
-        description: "Status ID for the result."
-
-  - name: status
-    description: "Statuses of race events and results."
-    columns:
-      - name: statusId
-        description: "Unique ID for each status."
-      - name: status
-        description: "Description of the status."
+      - name: status_id
+        description: "Status ID for the sprint race result."
