@@ -10,7 +10,7 @@ renamed as (
 
     select
         raceid AS race_id,
-        year,
+        year AS season,
         round AS race_round,
         circuitid AS circuit_id,
         name AS race_name,
