@@ -49,7 +49,11 @@ models:
       +database: "DEV_ALUMNO14_PROYECTO_FINAL"
       +schema: gold
       core:
-        +schema: gold
+        +schema: gold_core
+      driver_stats:
+        +schema: gold_driver_stats
+      constructor_stats:
+        +schema: gold_constructor_stats
 
 snapshots:
   +transient: false
